@@ -14,12 +14,12 @@
   left: 10%;
   right: 10%;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent);
 }
 
 .footerGrid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr;
   gap: var(--spacing-10);
   padding-bottom: var(--spacing-10);
 }
