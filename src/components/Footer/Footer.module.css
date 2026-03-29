@@ -1,0 +1,201 @@
+.footer {
+  background: var(--color-primary-dark);
+  color: var(--text-light);
+  position: relative;
+  padding: var(--spacing-12) 0 0;
+  overflow: hidden;
+}
+
+/* Subtle top decorative line */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: var(--spacing-10);
+  padding-bottom: var(--spacing-10);
+}
+
+/* Brand column */
+.brandName {
+  font-family: var(--font-secondary);
+  font-size: 2rem;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-3);
+  letter-spacing: 0.5px;
+}
+
+.brandTagline {
+  font-size: 0.92rem;
+  color: rgba(249, 246, 240, 0.6);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-4);
+  max-width: 280px;
+}
+
+.rewardsBadge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-light);
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.2s ease;
+}
+
+.rewardsBadge:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Contact / Hours columns */
+.footerColTitle {
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(249, 246, 240, 0.45);
+  margin-bottom: var(--spacing-4);
+}
+
+.footerLink,
+.footerText {
+  display: block;
+  font-size: 0.95rem;
+  color: rgba(249, 246, 240, 0.78);
+  line-height: 1.6;
+  transition: color 0.2s ease;
+}
+
+.footerLink {
+  cursor: pointer;
+}
+
+.footerLink:hover {
+  color: var(--text-light);
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Divider */
+.footerDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 0 var(--spacing-4);
+}
+
+/* Copyright bar */
+.footerBottom {
+  padding: var(--spacing-4) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.copyright {
+  font-size: 0.82rem;
+  color: rgba(249, 246, 240, 0.38);
+  font-family: var(--font-primary);
+}
+
+.footerBottomLinks {
+  display: flex;
+  gap: var(--spacing-4);
+}
+
+.footerBottomLink {
+  font-size: 0.82rem;
+  color: rgba(249, 246, 240, 0.38);
+  transition: color 0.2s ease;
+}
+
+.footerBottomLink:hover {
+  color: rgba(249, 246, 240, 0.7);
+}
+
+/* WhatsApp float */
+.whatsappFloat {
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  bottom: 32px;
+  right: 32px;
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  z-index: 200;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.whatsappFloat:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-8);
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: var(--spacing-8) 0 0;
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-5);
+    padding-bottom: var(--spacing-6);
+  }
+
+  .brandName {
+    font-size: 1.5rem;
+  }
+
+  .brandTagline {
+    font-size: 0.88rem;
+    max-width: 100%;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    padding: var(--spacing-3) 0;
+  }
+
+  .footerBottomLinks {
+    gap: var(--spacing-3);
+  }
+
+  .whatsappFloat {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 16px;
+  }
+}

@@ -1,0 +1,644 @@
+/* ═══════════════════════════════════════════════════════
+   CheckoutModal — Mobile-first / iPhone optimised
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Overlay ─────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1100;
+  display: flex;
+  /* Mobile: bottom sheet */
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Modal  (bottom sheet on mobile) ─────────────────── */
+.modal {
+  background: #fff;
+  border-radius: 22px 22px 0 0;
+  width: 100%;
+  max-width: 100%;
+  /* Respect iPhone home-bar + notch */
+  max-height: calc(96vh - env(safe-area-inset-top, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
+  animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  display: flex;
+  flex-direction: column;
+  /* bottom padding for iPhone home indicator */
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+/* Drag handle */
+.modal::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 4px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 2px;
+  margin: 10px auto 0;
+  flex-shrink: 0;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 2;
+}
+
+.modalTitle {
+  font-family: 'Fraunces', 'Georgia', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a2a1a;
+}
+
+.closeBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.07);
+  color: #444;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  /* good tap target on iOS */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Form ───────────────────────────────────────────── */
+.form {
+  padding: 16px 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ── Order Summary ──────────────────────────────────── */
+.summaryBox {
+  background: #f8f6f0;
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.summaryTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #3a5332;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.summaryList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.83rem;
+  color: #444;
+}
+
+.summaryItemName {
+  font-weight: 500;
+  max-width: 68%;
+  line-height: 1.3;
+}
+
+.summaryQty {
+  color: #999;
+  font-size: 0.76rem;
+}
+
+.summaryItemPrice {
+  font-weight: 700;
+  color: #222;
+  white-space: nowrap;
+  font-size: 0.85rem;
+}
+
+.summaryDivider {
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin: 8px 0;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.83rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.freeTag {
+  background: #27ae60;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 20px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.freeDeliveryHint {
+  font-size: 0.75rem;
+  color: #e67e22;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1a2a1a;
+  border-top: 1.5px solid rgba(0,0,0,0.1);
+  padding-top: 9px;
+  margin-top: 5px;
+}
+
+/* ── Form Sections ──────────────────────────────────── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.sectionLabel {
+  font-family: 'Fraunces', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #3a5332;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* ── Form Fields ────────────────────────────────────── */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  /* iOS-friendly large tap target */
+  padding: 13px 14px;
+  border: 1.5px solid rgba(0,0,0,0.13);
+  border-radius: 12px;
+  font-family: -apple-system, 'Inter', sans-serif;
+  font-size: 16px;        /* prevents iOS zoom on focus */
+  color: #222;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  resize: none;
+  -webkit-appearance: none;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #3a5332;
+  box-shadow: 0 0 0 3px rgba(58,83,50,0.1);
+}
+
+.inputError { border-color: #e74c3c !important; }
+
+.error {
+  font-size: 0.74rem;
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+/* ── Payment Options ────────────────────────────────── */
+.paymentOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.paymentOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 10px;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #444;
+  transition: all 0.2s ease;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.paymentOption input { display: none; }
+
+.paymentActive {
+  border-color: #3a5332 !important;
+  background: rgba(58,83,50,0.07) !important;
+  color: #3a5332 !important;
+  font-weight: 700;
+}
+
+.paymentIcon { font-size: 1.6rem; line-height: 1; }
+
+.paymentSubtext {
+  font-size: 0.67rem;
+  color: #999;
+  font-weight: 400;
+  margin-top: 1px;
+}
+
+/* ── Action Buttons ─────────────────────────────────── */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.placeOrderBtn {
+  width: 100%;
+  padding: 16px;
+  background: #3a5332;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-family: -apple-system, 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  letter-spacing: 0.1px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.placeOrderBtn:active { background: #2d4128; }
+
+.whatsappBtn {
+  width: 100%;
+  padding: 14px;
+  background: #25d366;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-family: -apple-system, 'Inter', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.whatsappBtn:active { background: #1ab954; }
+
+/* ── UPI Payment Screen ─────────────────────────────── */
+.upiScreen {
+  padding: 20px 18px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.upiAmount {
+  font-family: 'Fraunces', serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #1a2a1a;
+  margin: 0;
+  line-height: 1;
+}
+
+.upiAmountLabel {
+  font-size: 0.82rem;
+  color: #888;
+  margin: 0;
+  text-align: center;
+}
+
+/* QR wrapper */
+.qrWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #f7f7f7;
+  border-radius: 18px;
+  padding: 16px 18px;
+  border: 1.5px dashed rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.qrContainer {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  display: block;
+}
+
+.qrOverlayBadge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: white;
+  border-radius: 8px;
+  padding: 3px 7px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.qrBadgeIcon { font-size: 0.72rem; }
+.qrBadgeText {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #5f259f;
+  letter-spacing: 0.5px;
+}
+
+.qrHint {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* UPI ID row */
+.upiIdRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0f7ed;
+  border: 1.5px solid rgba(58,83,50,0.2);
+  border-radius: 12px;
+  padding: 11px 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.upiIdLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #3a5332;
+  white-space: nowrap;
+}
+
+.upiId {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #222;
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+}
+
+.copyBtn {
+  background: #3a5332;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 36px;
+}
+
+.copyBtn:active { background: #2d4128; }
+
+.copyBtnDone { background: #27ae60 !important; }
+
+/* OR divider */
+.orDivider {
+  font-size: 0.75rem;
+  color: #bbb;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* UPI App buttons — 2×2 grid on mobile */
+.upiApps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.upiAppBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 16px 8px 12px;
+  border: 1.5px solid rgba(0,0,0,0.09);
+  border-radius: 16px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  /* big enough for thumbs */
+  min-height: 84px;
+}
+
+.upiAppBtn:active {
+  transform: scale(0.96);
+  background: rgba(0,0,0,0.03);
+}
+
+.upiAppLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.upiAppName {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* UPI action buttons */
+.upiActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.backBtn {
+  width: 100%;
+  padding: 14px;
+  background: none;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  border-radius: 50px;
+  font-family: -apple-system, 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.backBtn:active {
+  border-color: #3a5332;
+  color: #3a5332;
+}
+
+/* ── Success Screen ─────────────────────────────────── */
+.successScreen {
+  padding: 32px 20px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.successAnim {
+  font-size: 4rem;
+  animation: bounce 0.55s ease;
+}
+
+@keyframes bounce {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+.successTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 1.7rem;
+  color: #3a5332;
+  margin: 0;
+}
+
+.successMsg {
+  font-size: 0.93rem;
+  color: #444;
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.successDetails {
+  background: #f0f7ed;
+  border-radius: 14px;
+  padding: 14px 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.successDetails p {
+  font-size: 0.84rem;
+  color: #333;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Desktop override (≥ 540px) ─────────────────────── */
+@media (min-width: 540px) {
+  .overlay {
+    align-items: center;
+    padding: 16px;
+  }
+
+  .modal {
+    border-radius: 20px;
+    max-width: 500px;
+    max-height: 88vh;
+    padding-bottom: 0;
+  }
+
+  .modal::before { display: none; }
+
+  .form { padding: 20px 24px 28px; gap: 20px; }
+
+  .upiScreen { padding: 24px 24px 32px; }
+
+  .upiApps { grid-template-columns: repeat(4, 1fr); }
+
+  .qrImage { width: 220px; height: 220px; }
+
+  .input, .textarea { font-size: 0.9rem; }
+
+  .placeOrderBtn { padding: 15px; }
+}

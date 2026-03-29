@@ -1,0 +1,291 @@
+/* ══════════════════════════════════════════
+   Ad Popup — Yaduvanshi General Store
+   ══════════════════════════════════════════ */
+
+/* ── Overlay ─────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 14, 4, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.5s ease;
+}
+
+.exit {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── Popup Panel ─────────────────────────── */
+.popup {
+  background: linear-gradient(145deg, #f9f6f0 0%, #fff 60%, #eef4eb 100%);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 580px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(58,83,50,0.12);
+  animation: popIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.popupExit {
+  animation: popOut 0.45s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.82) translateY(40px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+@keyframes popOut {
+  from { opacity: 1; transform: scale(1)    translateY(0); }
+  to   { opacity: 0; transform: scale(0.88) translateY(30px); }
+}
+
+/* ── Progress bar ────────────────────────── */
+.progressBar {
+  height: 4px;
+  background: rgba(58, 83, 50, 0.1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 4px 4px 0 0;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3a5332, #52914a);
+  border-radius: 4px;
+  transition: width 1s linear;
+}
+
+/* ── Top bar ─────────────────────────────── */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 4px;
+}
+
+.adLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #a47854;
+}
+
+.closeBtn {
+  background: rgba(58, 83, 50, 0.09);
+  border: 1.5px solid rgba(58, 83, 50, 0.15);
+  color: #3a5332;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 5px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s;
+  white-space: nowrap;
+}
+
+.closeBtn:hover {
+  background: rgba(58, 83, 50, 0.16);
+}
+
+/* ── Badge ───────────────────────────────── */
+.badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #3a5332, #526f48);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 999px;
+  margin: 10px auto 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  box-shadow: 0 4px 12px rgba(58, 83, 50, 0.3);
+}
+
+/* ── Hero area ───────────────────────────── */
+.hero {
+  text-align: center;
+  padding: 16px 24px 8px;
+}
+
+.storeName {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #3a5332 0%, #52914a 50%, #a47854 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  animation: shimmer 3s linear infinite;
+  background-size: 200% auto;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.storeSubtitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #a47854;
+  margin-top: 4px;
+}
+
+/* ── Offer cards ─────────────────────────── */
+.offers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 14px 18px;
+}
+
+.offerCard {
+  background: rgba(58, 83, 50, 0.05);
+  border: 1.5px solid rgba(58, 83, 50, 0.1);
+  border-radius: 14px;
+  padding: 12px 10px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.offerCard:hover { transform: translateY(-3px); }
+
+.offerCardAccent {
+  background: linear-gradient(135deg, rgba(58, 83, 50, 0.08), rgba(164, 120, 84, 0.07));
+  border-color: rgba(58, 83, 50, 0.2);
+}
+
+.offerIcon {
+  font-size: 1.7rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.offerTitle {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #1a1a18;
+  margin-bottom: 3px;
+}
+
+.offerDesc {
+  font-size: 0.7rem;
+  color: #6b665c;
+  line-height: 1.35;
+}
+
+/* ── CTA row ─────────────────────────────── */
+.ctaRow {
+  display: flex;
+  gap: 10px;
+  padding: 6px 18px 14px;
+}
+
+.ctaBtn {
+  flex: 1;
+  background: linear-gradient(135deg, #3a5332, #526f48);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 4px 16px rgba(58, 83, 50, 0.35);
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(58, 83, 50, 0.45);
+}
+
+.whatsappBtn {
+  flex: 1;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+}
+
+.whatsappBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+}
+
+/* ── Footer line ─────────────────────────── */
+.footerLine {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #6b665c;
+  padding: 0 18px 14px;
+  line-height: 1.5;
+  border-top: 1px solid rgba(58, 83, 50, 0.08);
+  padding-top: 10px;
+}
+
+/* ── Mobile ──────────────────────────────── */
+@media (max-width: 480px) {
+  .popup { border-radius: 20px; }
+
+  .offers {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    padding: 10px 12px;
+  }
+
+  .offerCard { padding: 10px 6px; }
+  .offerIcon { font-size: 1.3rem; }
+  .offerTitle { font-size: 0.72rem; }
+  .offerDesc { font-size: 0.62rem; }
+
+  .ctaRow {
+    flex-direction: column;
+    padding: 6px 12px 12px;
+    gap: 8px;
+  }
+
+  .storeName { font-size: 2rem; }
+}
