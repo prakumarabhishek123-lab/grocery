@@ -1,7 +1,8 @@
 .gatewayWrapper {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, #151f12 0%, #050c03 100%);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -446,3 +446,113 @@
     font-size: 0.58rem;
   }
 }
+
+/* ── Profile Dropdown ── */
+.profileContainer {
+  position: relative;
+}
+
+.profileTrigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(249, 246, 240, 0.92);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: background 0.2s ease, color 0.35s ease;
+}
+.header.scrolled .profileTrigger {
+  color: var(--text-dark);
+}
+
+.profileTrigger:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+.header.scrolled .profileTrigger:hover {
+  background: rgba(58, 83, 50, 0.08);
+}
+
+.profileName {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.profileDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  border: 1px solid #eaeaea;
+}
+
+.profileContainer:hover .profileDropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.profileDropdownHeader {
+  padding: 16px 20px;
+  background: #fafafa;
+  color: #333;
+}
+
+.profileGreeting {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.profileFullName {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-top: 2px;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: #eee;
+  margin: 4px 0;
+}
+
+.profileDropdownItem {
+  color: #333;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-family: var(--font-primary);
+}
+
+.profileDropdownItem:hover {
+  background: #f5f8fa;
+  color: var(--color-primary-dark);
+}
+
+.profileDropdownLogout {
+  color: #e53e3e;
+}
+
+.profileDropdownLogout:hover {
+  background: #fff5f5;
+  color: #c53030;
+}

@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import styles from './CartDrawer.module.css';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import CheckoutModal from '../CheckoutModal/CheckoutModal';
 
 const CartDrawer = () => {
   const { cartItems, cartOpen, setCartOpen, updateQuantity, removeFromCart, getCartTotal } = useCart();
+  const { isAuthenticated, setAuthModalOpen } = useAuth();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   const handleCheckout = () => {
     setCartOpen(false);
-    setCheckoutOpen(true);
+    if (!isAuthenticated) {
+      setAuthModalOpen(true);
+    } else {
+      setCheckoutOpen(true);
+    }
   };
 
   return (
