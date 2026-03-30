@@ -1,14 +1,13 @@
-.modalOverlay {
+.gatewayWrapper {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: linear-gradient(135deg, #151f12 0%, #050c03 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   padding: 20px;
-  animation: fadeIn 0.2s ease-out forwards;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
 @keyframes fadeIn {
@@ -32,27 +31,6 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.closeBtn {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #666;
-  padding: 8px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-
-.closeBtn:hover {
-  background: rgba(0,0,0,0.05);
-  color: #000;
-}
-
 .header {
   text-align: center;
   margin-bottom: 24px;
@@ -68,6 +46,28 @@
 .header p {
   color: #666;
   font-size: 0.9rem;
+}
+
+.errorMsg {
+  background-color: #fde8e8;
+  color: #c81e1e;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid #f8b4b4;
+}
+
+.successMsg {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid #a5d6a7;
 }
 
 .form {

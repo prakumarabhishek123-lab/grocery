@@ -14,10 +14,16 @@ import CartDrawer from './components/CartDrawer/CartDrawer'
 import ProductModal from './components/ProductModal/ProductModal'
 import { CartProvider } from './context/CartContext'
 import AdPopup from './components/AdPopup/AdPopup'
+import AuthModal from './components/AuthModal/AuthModal'
 
 function App() {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  if (!isAuthenticated) {
+    return <AuthModal onSuccess={() => setIsAuthenticated(true)} />;
+  }
 
   return (
     <CartProvider>

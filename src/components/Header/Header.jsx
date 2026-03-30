@@ -4,14 +4,12 @@ import { navigationLinks, categoriesData } from '../../data/mockData';
 import { Package, Search, User, ShoppingCart, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import SearchModal from '../SearchModal/SearchModal';
-import AuthModal from '../AuthModal/AuthModal';
 
 const Header = ({ setSelectedCategoryId }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [authOpen, setAuthOpen] = useState(false);
   const { getCartCount, setCartOpen } = useCart();
   const cartCount = getCartCount();
 
@@ -121,7 +119,7 @@ const Header = ({ setSelectedCategoryId }) => {
             <button aria-label="Search" className={styles.iconBtn} onClick={() => setSearchOpen(true)}>
               <Search size={20} strokeWidth={1.5} />
             </button>
-            <button aria-label="Profile" className={styles.iconBtn} onClick={() => setAuthOpen(true)}>
+            <button aria-label="Profile" className={styles.iconBtn}>
               <User size={20} strokeWidth={1.5} fill="currentColor" />
             </button>
             <button aria-label="Cart" className={styles.iconBtn} onClick={handleCartClick}>
@@ -150,9 +148,6 @@ const Header = ({ setSelectedCategoryId }) => {
 
       {/* Global Search Modal */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-
-      {/* Auth Modal */}
-      <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
     </>
   );
 };
