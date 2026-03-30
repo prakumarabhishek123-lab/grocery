@@ -13,20 +13,23 @@ import ShopEssentials from './components/ShopEssentials/ShopEssentials'
 import CartDrawer from './components/CartDrawer/CartDrawer'
 import ProductModal from './components/ProductModal/ProductModal'
 import { CartProvider } from './context/CartContext'
+import { AuthProvider, useAuth } from './context/AuthContext'
 import AdPopup from './components/AdPopup/AdPopup'
 import AuthModal from './components/AuthModal/AuthModal'
+
+function GlobalAuthModal() {
+  const { authModalOpen } = useAuth();
+  if (!authModalOpen) return null;
+  return <AuthModal />;
+}
 
 function App() {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  if (!isAuthenticated) {
-    return <AuthModal onSuccess={() => setIsAuthenticated(true)} />;
-  }
 
   return (
-    <CartProvider>
+    <AuthProvider>
+      <CartProvider>
       <AdPopup />
       <Header setSelectedCategoryId={setSelectedCategoryId} />
       <Hero />
@@ -50,7 +53,9 @@ function App() {
           onClose={() => setSelectedProduct(null)}
         />
       )}
+      <GlobalAuthModal />
     </CartProvider>
+  </AuthProvider>
   )
 }
 

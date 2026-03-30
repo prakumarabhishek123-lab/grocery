@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './AuthModal.module.css';
-import { Mail, Lock, User as UserIcon } from 'lucide-react';
+import { Mail, Lock, User as UserIcon, X } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 const AuthModal = ({ onSuccess }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,21 +16,21 @@ const AuthModal = ({ onSuccess }) => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleSubmit = (e) => {
+  const { login, signup, setAuthModalOpen } = useAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
-    // Load existing users from local storage to act as our "database"
-    const storedUsers = JSON.parse(localStorage.getItem('store_users') || '[]');
-
     if (isLogin) {
       // Login logic
-      const user = storedUsers.find(u => u.email === email && u.password === password);
-      if (user) {
-        onSuccess();
-      } else {
-        setError('Invalid email or password. Please try again or create an account.');
+      try {
+        await login(email, password);
+        if (onSuccess) onSuccess();
+        setAuthModalOpen(false);
+      } catch (err) {
+        setError(err);
       }
     } else {
       // Registration logic
@@ -38,22 +39,16 @@ const AuthModal = ({ onSuccess }) => {
         return;
       }
       
-      const userExists = storedUsers.some(u => u.email === email);
-      if (userExists) {
-        setError('An account with this email already exists.');
-        return;
+      try {
+        await signup(name, email, password);
+        // Auto-switch to login mode and show success message
+        setSuccess('Account created successfully! Please log in.');
+        setIsLogin(true);
+        setPassword('');
+        setConfirmPassword('');
+      } catch (err) {
+        setError(err);
       }
-
-      // Create and save new user
-      const newUser = { name, email, password };
-      storedUsers.push(newUser);
-      localStorage.setItem('store_users', JSON.stringify(storedUsers));
-      
-      // Auto-switch to login mode and show success message
-      setSuccess('Account created successfully! Please log in.');
-      setIsLogin(true);
-      setPassword('');
-      setConfirmPassword('');
     }
   };
 
@@ -69,9 +64,17 @@ const AuthModal = ({ onSuccess }) => {
     <div className={styles.gatewayWrapper}>
       <div className={styles.modalContent}>
 
-        <div className={styles.header}>
+        <div className={styles.header} style={{ position: 'relative' }}>
           <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
           <p>{isLogin ? 'Login to your account to continue' : 'Sign up to get started'}</p>
+          <button 
+            type="button" 
+            onClick={() => setAuthModalOpen(false)} 
+            style={{ position: 'absolute', top: 0, right: 0, background: 'none', border: 'none', cursor: 'pointer', padding: '8px', color: 'inherit' }}
+            aria-label="Close"
+          >
+            <X size={20} />
+          </button>
         </div>
 
         {error && <div className={styles.errorMsg}>{error}</div>}

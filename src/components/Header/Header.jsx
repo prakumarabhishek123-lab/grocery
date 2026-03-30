@@ -3,6 +3,7 @@ import styles from './Header.module.css';
 import { navigationLinks, categoriesData } from '../../data/mockData';
 import { Package, Search, User, ShoppingCart, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import SearchModal from '../SearchModal/SearchModal';
 
 const Header = ({ setSelectedCategoryId }) => {
@@ -11,6 +12,7 @@ const Header = ({ setSelectedCategoryId }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { getCartCount, setCartOpen } = useCart();
+  const { isAuthenticated, user, logout, setAuthModalOpen } = useAuth();
   const cartCount = getCartCount();
 
   useEffect(() => {
@@ -119,9 +121,50 @@ const Header = ({ setSelectedCategoryId }) => {
             <button aria-label="Search" className={styles.iconBtn} onClick={() => setSearchOpen(true)}>
               <Search size={20} strokeWidth={1.5} />
             </button>
-            <button aria-label="Profile" className={styles.iconBtn}>
-              <User size={20} strokeWidth={1.5} fill="currentColor" />
-            </button>
+            
+            {isAuthenticated ? (
+              <div className={styles.profileContainer}>
+                <div className={styles.profileTrigger}>
+                  <User size={20} strokeWidth={1.5} fill="currentColor" />
+                  {user?.name && <span className={styles.profileName}>{user.name.split(' ')[0]}</span>}
+                  <ChevronDown size={14} style={{ marginLeft: '-2px' }} />
+                </div>
+                <div className={styles.profileDropdown}>
+                  <div className={styles.profileDropdownHeader}>
+                    <div className={styles.profileGreeting}>Hello,</div>
+                    <div className={styles.profileFullName}>{user?.name || 'User'}</div>
+                  </div>
+                  <div className={styles.dropdownDivider} />
+                  <a href="#profile" className={styles.profileDropdownItem}>My Profile</a>
+                  <a href="#orders" className={styles.profileDropdownItem}>Orders</a>
+                  <a href="#addresses" className={styles.profileDropdownItem}>Saved Addresses</a>
+                  <a href="#wishlist" className={styles.profileDropdownItem}>Wishlist</a>
+                  <div className={styles.dropdownDivider} />
+                  <button 
+                    onClick={() => { logout(); window.location.reload(); }} 
+                    className={`${styles.profileDropdownItem} ${styles.profileDropdownLogout}`}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '4px', marginRight: '4px' }}>
+                <button 
+                  onClick={() => setAuthModalOpen(true)} 
+                  style={{ fontSize: '18px', fontWeight: '800', background: 'transparent', border: 'none', cursor: 'pointer', color: 'green' ,paddingRight:'10px' }}
+                >
+                  Log in
+                </button>
+                <button 
+                  onClick={() => setAuthModalOpen(true)} 
+                  style={{ fontSize: '13px', fontWeight: '500', background: '#22c55e', color: 'white', border: 'none', cursor: 'pointer', padding: '6px 12px', borderRadius: '20px' }}
+                >
+                  Sign up
+                </button>
+              </div>
+            )}
+
             <button aria-label="Cart" className={styles.iconBtn} onClick={handleCartClick}>
               <div className={styles.cartIconWrapper}>
                 <ShoppingCart size={20} strokeWidth={1.5} />
