@@ -100,16 +100,11 @@ const Hero = () => {
       {/* ── Main content ── */}
       <div className={`container ${styles.heroContent}`} ref={revealRef}>
 
-        <p className={`${styles.eyebrow} reveal-fade`}>
-          Utraula · Balrampur, U.P.
-        </p>
 
         <div className={styles.textContent}>
           <h1 className={`${styles.headline} reveal-up delay-100`}>
             <span className={styles.shimmerSpan}>YADUVANSHI</span>
-            <br />
             <span className={styles.subSpan}>GENERAL STORE</span>
-            <br />
             <span className={styles.locationSpan}>
               MAIN ROAD UTRAULA, BALRAMPUR (U.P)
             </span>
