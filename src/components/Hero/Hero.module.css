@@ -195,59 +195,56 @@
 
 /* shimmer span on "YADUVANSHI" */
 .shimmerSpan {
-  display: inline-block;
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0.6) 0%,
-    rgba(255,255,255,1)   30%,
-    rgba(214,175,144,1)   50%,
-    rgba(255,255,255,1)   70%,
-    rgba(255,255,255,0.6) 100%
-  );
-  background-size: 200% auto;
+  display: block;
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  font-weight: 800;
+  background: linear-gradient(to right, #ffffff, #fdf5e6, #e8d0b3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 3.5s linear infinite;
-}
-
-@keyframes shimmer {
-  0%   { background-position: 200% center; }
-  100% { background-position: -200% center; }
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 2px;
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.6));
+  margin-bottom: 4px;
 }
 
 .subSpan {
-  display: inline-block;
-  font-size: 0.75em;
-  color: rgba(214, 175, 144, 0.92);
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  display: block;
   font-family: var(--font-primary);
-  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #deb887;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-shadow: 0 3px 6px rgba(0,0,0,0.7);
+  margin-bottom: 24px;
   -webkit-text-fill-color: initial;
 }
 
 .locationSpan {
-  display: inline-block;
-  font-size: 0.42em;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  display: block;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #ffffff;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
   font-family: var(--font-primary);
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
   line-height: 1.4;
+  margin-bottom: 16px;
   -webkit-text-fill-color: initial;
 }
 
 /* ── Subheadline ────────────────────────────────────── */
 .subheadline {
   font-family: var(--font-primary);
-  font-size: clamp(0.95rem, 2vw, 1.18rem);
-  font-weight: 500;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  line-height: 1.65;
-  max-width: 480px;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
+  line-height: 1.6;
+  max-width: 600px;
 }
 
 /* ── Trust chips ────────────────────────────────────── */
