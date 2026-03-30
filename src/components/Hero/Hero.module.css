@@ -32,8 +32,8 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(15, 28, 10, 0.55) 0%,
-    rgba(5, 12, 3, 0.82) 100%
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.9) 100%
   );
   pointer-events: none;
   z-index: 1;
@@ -155,10 +155,11 @@
   gap: 8px;
   font-family: var(--font-primary);
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: rgba(249, 246, 240, 0.7);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   margin-bottom: 20px;
   animation: fadeSlideDown 0.8s ease both;
 }
@@ -229,9 +230,10 @@
 .locationSpan {
   display: inline-block;
   font-size: 0.42em;
-  color: rgba(249, 246, 240, 0.55);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
   font-family: var(--font-primary);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.5px;
   line-height: 1.4;
   -webkit-text-fill-color: initial;
@@ -241,8 +243,9 @@
 .subheadline {
   font-family: var(--font-primary);
   font-size: clamp(0.95rem, 2vw, 1.18rem);
-  font-weight: 400;
-  color: rgba(249, 246, 240, 0.72);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   line-height: 1.65;
   max-width: 480px;
 }
