@@ -4,6 +4,7 @@ import { navigationLinks, categoriesData } from '../../data/mockData';
 import { Package, Search, User, ShoppingCart, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
+import { useWishlist } from '../../context/WishlistContext';
 import SearchModal from '../SearchModal/SearchModal';
 
 const Header = ({ setSelectedCategoryId }) => {
@@ -13,6 +14,7 @@ const Header = ({ setSelectedCategoryId }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const { getCartCount, setCartOpen } = useCart();
   const { isAuthenticated, user, logout, setAuthModalOpen } = useAuth();
+  const { setWishlistOpen } = useWishlist();
   const cartCount = getCartCount();
 
   useEffect(() => {
@@ -138,7 +140,7 @@ const Header = ({ setSelectedCategoryId }) => {
                   <a href="#profile" className={styles.profileDropdownItem}>My Profile</a>
                   <a href="#orders" className={styles.profileDropdownItem}>Orders</a>
                   <a href="#addresses" className={styles.profileDropdownItem}>Saved Addresses</a>
-                  <a href="#wishlist" className={styles.profileDropdownItem}>Wishlist</a>
+                  <a href="#wishlist" className={styles.profileDropdownItem} onClick={(e) => { e.preventDefault(); setWishlistOpen(true); }}>Wishlist</a>
                   <div className={styles.dropdownDivider} />
                   <button 
                     onClick={() => { logout(); window.location.reload(); }} 

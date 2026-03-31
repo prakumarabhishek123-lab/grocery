@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import styles from './ProductCard.module.css';
 import { useCart } from '../../context/CartContext';
+import { useWishlist } from '../../context/WishlistContext';
+import { Heart } from 'lucide-react';
 
 /* ── Emoji fallback per category ──────────────────────── */
 const CATEGORY_EMOJI = {
@@ -19,6 +21,9 @@ const ProductCard = ({ product }) => {
   const [qty, setQty] = useState(0); // 0 = "Add" button shown, >0 = qty stepper shown
   const [imgError, setImgError] = useState(false);
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+
+  const isFav = isInWishlist(product.id);
 
   const currentPrice = product.prices[selectedWeight] ?? 0;
   // Try to estimate an original price for discount badge (20–30% above if badge exists)
@@ -55,7 +60,16 @@ const ProductCard = ({ product }) => {
       {/* ── Image Area ──────────────── */}
       <div className={styles.imageWrap}>
 
-        {/* Discount badge — top-right */}
+        {/* Wishlist Button — top-right */}
+        <button 
+          className={styles.wishlistBtn} 
+          onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
+          aria-label="Toggle wishlist"
+        >
+          <Heart size={18} fill={isFav ? "#ff4f4f" : "none"} stroke={isFav ? "#ff4f4f" : "#999"} />
+        </button>
+
+        {/* Discount badge */}
         {discount && (
           <span className={styles.discountBadge}>{discount}% OFF</span>
         )}

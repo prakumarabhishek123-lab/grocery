@@ -2,7 +2,9 @@ import React, { useState, useMemo, useCallback } from 'react';
 import styles from './ShopEssentials.module.css';
 import { essentialsCategories, essentialsData } from '../../data/mockData';
 import { useCart } from '../../context/CartContext';
+import { useWishlist } from '../../context/WishlistContext';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { Heart } from 'lucide-react';
 
 /* ══════════════════════════════════════════════════
    Star Rating
@@ -34,6 +36,9 @@ const EssentialCard = ({ product, onViewDetails }) => {
   const [qty, setQty] = useState(0);
   const [imgErr, setImgErr] = useState(false);
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+
+  const isFav = isInWishlist(product.id);
 
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -63,6 +68,15 @@ const EssentialCard = ({ product, onViewDetails }) => {
 
       {/* ── Image Area ───────────────── */}
       <div className={styles.imageWrap}>
+        {/* Wishlist Button — top-right */}
+        <button 
+          className={styles.wishlistBtn} 
+          onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
+          aria-label="Toggle wishlist"
+        >
+          <Heart size={18} fill={isFav ? "#ff4f4f" : "none"} stroke={isFav ? "#ff4f4f" : "#999"} />
+        </button>
+
         {/* Discount badge — top right */}
         {discount && (
           <span className={styles.discountBadge}>{discount}% OFF</span>
