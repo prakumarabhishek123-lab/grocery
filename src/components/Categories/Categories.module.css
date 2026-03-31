@@ -99,6 +99,7 @@
   padding: 20px 40px;
   width: 100%;
   scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch; /* Native momentum scrolling for iOS */
 }
 
 .categoryList::-webkit-scrollbar {
@@ -191,37 +192,104 @@
   background: #f0f0f0;
 }
 
-/* ── Responsive ──────────────────────────────────────────── */
+/* ── Responsive Breakpoints ──────────────────────────────── */
+
+/* Tablet: iPad/Tablets */
+@media (max-width: 1024px) {
+  .categoryList {
+    padding: 20px 24px;
+  }
+  .categoryCard {
+    width: 95px;
+  }
+  .imageWrap {
+    width: 72px;
+    height: 72px;
+  }
+  .arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 1.4rem;
+  }
+  .arrowLeft { left: 4px; }
+  .arrowRight { right: 4px; }
+}
+
+/* Mobile: Phones */
 @media (max-width: 600px) {
+  .categoriesSection {
+    margin: 8px 0;
+  }
+
   .banner {
     padding: 12px 16px 10px;
   }
 
+  .bannerLeft {
+    flex-direction: column;
+    gap: 2px;
+  }
+
   .bannerTitle {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+  }
+
+  .bannerSub {
+    font-size: 0.72rem;
+  }
+
+  .viewAll {
+    align-self: flex-end;
   }
 
   .categoryList {
-    padding: 16px 24px;
-    gap: 0;
+    padding: 16px 16px;
+    /* Ensure padding is preserved at the end of scroll on mobile */
+    scroll-padding-right: 16px;
+  }
+
+  /* Add invisible pseudo-element to guarantee trailing padding on iOS safari */
+  .categoryList::after {
+    content: '';
+    padding-right: 16px;
   }
 
   .categoryCard {
-    width: 90px;
+    width: 82px;
+    padding: 4px 6px 8px;
   }
 
   .imageWrap {
-    width: 68px;
-    height: 68px;
+    width: 62px;
+    height: 62px;
   }
 
   .catName {
     font-size: 0.72rem;
   }
 
+  .offerPill {
+    font-size: 0.65rem;
+  }
+
+  /* Hide desktop scroll arrows on mobile; rely on native touch scroll */
   .arrow {
-    width: 28px;
-    height: 28px;
-    font-size: 1.3rem;
+    display: none;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+  .categoryCard {
+    width: 76px;
+  }
+  
+  .imageWrap {
+    width: 58px;
+    height: 58px;
+  }
+  
+  .bannerTitle {
+    font-size: 1.05rem;
   }
 }
