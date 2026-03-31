@@ -12,7 +12,8 @@ const Categories = ({ setSelectedCategoryId }) => {
   };
 
   return (
-    <section className={styles.categoriesSection}>
+    <div className="container">
+      <section className={styles.categoriesSection}>
       {/* Top blue Flipkart-style banner */}
       <div className={styles.banner}>
         <div className={styles.bannerLeft}>
@@ -89,6 +90,7 @@ const Categories = ({ setSelectedCategoryId }) => {
       {/* Bottom separator like Flipkart */}
       <div className={styles.divider} />
     </section>
+    </div>
   );
 };
 

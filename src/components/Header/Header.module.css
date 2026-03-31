@@ -386,7 +386,7 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   /* hide desktop nav links only */
   .nav {
     display: none;
@@ -401,12 +401,12 @@
   }
 
   .logoImg {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
   }
 
   .logoMain {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
 
   .logoSub {
@@ -414,7 +414,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .header {
     padding: 14px 0;
   }
@@ -441,9 +441,22 @@
   .cartCountBadge {
     top: -6px;
     right: -6px;
-    height: 16px;
-    width: 16px;
-    font-size: 0.58rem;
+    height: 18px;
+    width: 18px;
+    font-size: 0.62rem;
+  }
+
+  .profileName {
+    display: none; /* Hide name on small screens, keep icon */
+  }
+
+  .profileDropdown {
+    min-width: 180px;
+    top: calc(100% + 5px);
+  }
+
+  .hiddenMobile {
+    display: none !important;
   }
 }
 
@@ -497,7 +510,8 @@
   border: 1px solid #eaeaea;
 }
 
-.profileContainer:hover .profileDropdown {
+.profileContainer:hover .profileDropdown,
+.profileContainer.profileOpen .profileDropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);

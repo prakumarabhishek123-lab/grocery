@@ -8,6 +8,7 @@ import SearchModal from '../SearchModal/SearchModal';
 
 const Header = ({ setSelectedCategoryId }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -123,7 +124,12 @@ const Header = ({ setSelectedCategoryId }) => {
             </button>
             
             {isAuthenticated ? (
-              <div className={styles.profileContainer}>
+              <div 
+                className={`${styles.profileContainer} ${isProfileOpen ? styles.profileOpen : ''}`}
+                onMouseEnter={() => setIsProfileOpen(true)}
+                onMouseLeave={() => setIsProfileOpen(false)}
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+              >
                 <div className={styles.profileTrigger}>
                   <User size={20} strokeWidth={1.5} fill="currentColor" />
                   {user?.name && <span className={styles.profileName}>{user.name.split(' ')[0]}</span>}
@@ -158,6 +164,7 @@ const Header = ({ setSelectedCategoryId }) => {
                 </button>
                 <button 
                   onClick={() => setAuthModalOpen(true)} 
+                  className={styles.hiddenMobile}
                   style={{ fontSize: '13px', fontWeight: '500', background: '#22c55e', color: 'white', border: 'none', cursor: 'pointer', padding: '6px 12px', borderRadius: '20px' }}
                 >
                   Sign up
