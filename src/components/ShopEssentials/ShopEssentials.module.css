@@ -243,7 +243,7 @@
 /* Badges */
 .discountBadge {
   position: absolute;
-  top: 8px;
+  top: 38px;
   right: 8px;
   background: #ff4f4f;
   color: #fff;
@@ -254,6 +254,30 @@
   border-radius: 4px;
   letter-spacing: 0.3px;
   z-index: 2;
+}
+
+/* Wishlist Button */
+.wishlistBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+.wishlistBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
 .categoryBadge {

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './ProductModal.module.css';
 import { useCart } from '../../context/CartContext';
+import { useWishlist } from '../../context/WishlistContext';
+import { Heart } from 'lucide-react';
 import { essentialsData, essentialsCategories } from '../../data/mockData';
 
 const StarRating = ({ rating }) => {
@@ -19,8 +21,11 @@ const ProductModal = ({ product, onClose }) => {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const { addToCart, setCartOpen } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   if (!product) return null;
+
+  const isFav = isInWishlist(product.id);
 
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -48,6 +53,13 @@ const ProductModal = ({ product, onClose }) => {
         <div className={styles.modalBody}>
           {/* Image panel */}
           <div className={styles.imagePanel} style={{ background: product.bgColor || '#f4ede2' }}>
+            <button 
+              className={styles.wishlistBtn} 
+              onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
+              aria-label="Toggle wishlist"
+            >
+              <Heart size={22} fill={isFav ? "#ff4f4f" : "none"} stroke={isFav ? "#ff4f4f" : "#999"} />
+            </button>
             {product.badge && (
               <span className={styles.badge}>{product.badge}</span>
             )}

@@ -14,8 +14,10 @@ import CartDrawer from './components/CartDrawer/CartDrawer'
 import ProductModal from './components/ProductModal/ProductModal'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
+import { WishlistProvider } from './context/WishlistContext'
 import AdPopup from './components/AdPopup/AdPopup'
 import AuthModal from './components/AuthModal/AuthModal'
+import WishlistDrawer from './components/WishlistDrawer/WishlistDrawer'
 
 function GlobalAuthModal() {
   const { authModalOpen } = useAuth();
@@ -29,9 +31,10 @@ function App() {
 
   return (
     <AuthProvider>
-      <CartProvider>
-      <AdPopup />
-      <Header setSelectedCategoryId={setSelectedCategoryId} />
+      <WishlistProvider>
+        <CartProvider>
+          <AdPopup />
+          <Header setSelectedCategoryId={setSelectedCategoryId} />
       <Hero />
       <SpecialOffers setSelectedCategoryId={setSelectedCategoryId} />
       <StoreValues />
@@ -47,6 +50,7 @@ function App() {
 
       {/* Global overlays */}
       <CartDrawer />
+      <WishlistDrawer />
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
@@ -54,8 +58,9 @@ function App() {
         />
       )}
       <GlobalAuthModal />
-    </CartProvider>
-  </AuthProvider>
+        </CartProvider>
+      </WishlistProvider>
+    </AuthProvider>
   )
 }
 
