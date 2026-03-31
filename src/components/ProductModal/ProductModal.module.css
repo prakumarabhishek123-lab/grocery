@@ -204,12 +204,11 @@
 }
 
 .discount {
-  background: #e74c3c;
-  color: white;
+  color: #ff4f4f;
+  font-family: var(--font-primary);
   font-size: 0.75rem;
   font-weight: 700;
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
+  letter-spacing: 0.3px;
 }
 
 .description {

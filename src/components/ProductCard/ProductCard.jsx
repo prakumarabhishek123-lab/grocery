@@ -69,11 +69,6 @@ const ProductCard = ({ product }) => {
           <Heart size={18} fill={isFav ? "#ff4f4f" : "none"} stroke={isFav ? "#ff4f4f" : "#999"} />
         </button>
 
-        {/* Discount badge */}
-        {discount && (
-          <span className={styles.discountBadge}>{discount}% OFF</span>
-        )}
-
         {/* Category badge pill — top-left */}
         {product.badge && (
           <span
@@ -127,7 +122,10 @@ const ProductCard = ({ product }) => {
         <div className={styles.priceRow}>
           <span className={styles.price}>₹{currentPrice}</span>
           {originalPrice && (
-            <span className={styles.originalPrice}>₹{originalPrice}</span>
+            <>
+              <span className={styles.originalPrice}>₹{originalPrice}</span>
+              <span className={styles.discountText}>{discount}% OFF</span>
+            </>
           )}
         </div>
 

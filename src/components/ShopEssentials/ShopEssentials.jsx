@@ -77,10 +77,6 @@ const EssentialCard = ({ product, onViewDetails }) => {
           <Heart size={18} fill={isFav ? "#ff4f4f" : "none"} stroke={isFav ? "#ff4f4f" : "#999"} />
         </button>
 
-        {/* Discount badge — top right */}
-        {discount && (
-          <span className={styles.discountBadge}>{discount}% OFF</span>
-        )}
         {/* Bestseller / badge — top left */}
         {product.badge && (
           <span className={styles.categoryBadge}>{product.badge}</span>
@@ -125,7 +121,7 @@ const EssentialCard = ({ product, onViewDetails }) => {
             <span className={styles.originalPrice}>₹{product.originalPrice}</span>
           )}
           {discount && (
-            <span className={styles.savingLabel}>{discount}% off</span>
+            <span className={styles.discountText}>{discount}% OFF</span>
           )}
         </div>
 
